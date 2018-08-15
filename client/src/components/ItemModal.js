@@ -4,7 +4,7 @@ import {
     Modal,
     ModalHeader,
     ModalBody,
-    form,
+    Form,
     FormGroup,
     Label,
     Input
@@ -61,12 +61,13 @@ class ItemModal extends Component {
                      Add to list
                     </ModalHeader>
                     <ModalBody>
+                        <Form onSubmit={this.onSubmit}>
                         <FormGroup>
                             <Label for="item">Item</Label>
                             <Input
                              type="text"
                              name="name"
-                             id="id"
+                             id="item"
                              placeholder="Add to list"
                              onChange={this.onChange}
                             />
@@ -74,12 +75,12 @@ class ItemModal extends Component {
                              color="dark"
                              style={{ marginTop: '2rem'}}
                              block
-                             onClick={this.onSubmit}
                             >
                              Add
                             </Button>
                             
                         </FormGroup>
+                        </Form>
                     </ModalBody>
                 </Modal>
             </div>

@@ -7,9 +7,12 @@ import PropTypes from 'prop-types';
 
 class TodoList extends Component {
 
-    componentDidMoumt() {
+    componentDidMount() {
         this.props.getItems();
+        console.log("didMount");
     }
+
+    
 
     onDeleteClick = (id) => {
         this.props.deleteItem(id);
@@ -19,27 +22,16 @@ class TodoList extends Component {
         const { items } = this.props.item;
         return(
             <Container>
-                {/* <Button dolor="dark" atyle={{marginBottom: '2rem'}} onClick={() => {
-                    const name = prompt('Enter Item');
-                    if(name) {
-                        this.setState(state => ({
-                            items: [...state.items, { id: uuid(), name}]
-                        }));
-                    }
-                }}
-                >Add Item
-                </Button> */}
-
                 <ListGroup>
                     <TransitionGroup className="todo-list">
-                      {items.map(({ id, name }) => (
-                          <CSSTransition key={id} timewout={500} classNames="fade">
+                      {items.map(({ _id, name }) => (
+                          <CSSTransition key={_id} timeout={500} classNames="fade">
                             <ListGroupItem>
                             <Button
                                 className="remove-btn"
                                 color="danger"
                                 size="sm"
-                                onClick={this.onDeleteClick.bind(this, id)}
+                                onClick={this.onDeleteClick.bind(this, _id)}
                             >
                                 &times;
                             </Button>
@@ -57,7 +49,7 @@ class TodoList extends Component {
 TodoList.propTypes = {
     getItems: PropTypes.func.isRequired,
     item: PropTypes.object.isRequired
-}
+};          
 
 const mapStateToProps = (state) => ({
     item: state.item
@@ -65,5 +57,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(
     mapStateToProps,
-    { getItems, deleteItem }
+    { getItems, deleteItem}
 )(TodoList);

@@ -3,22 +3,13 @@ import axios from 'axios';
 
 export const getItems = () => dispatch => {
     dispatch(setItemsLoading());
-    axios
-      .get('/api/items')
-      .then(res =>
+    axios.get('/api/items').then(res =>
             dispatch({
                 type: GET_ITEMS,
                 payload: res.data
             })
-        )
+        );
 
-};
-
-export const deleteItem = id => {
-    return {
-        type: DELETE_ITEM,
-        payload: id
-    }
 };
 
 export const addItem = item => dispatch => {
@@ -30,6 +21,15 @@ export const addItem = item => dispatch => {
             payload: res.data
         })
     )
+};
+
+export const deleteItem = id => dispatch => {
+    axios.delete(`/api/items/${id}`).then(res =>
+        dispatch({
+            type: DELETE_ITEM,
+            payload: id
+        })
+    );
 };
 
 export const setItemsLoading = () => {
